@@ -1,0 +1,116 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class ArrayOperationsMenu {
+    // A method to display the elements of an array up to a specified size.
+    public static void displayArray(int[] arr, int size) {
+        System.out.println("Array elements:");
+        for (int i = 0; i < size; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Get the initial size of the array from the user.
+        System.out.print("Enter the size of the array: ");
+        int size = scanner.nextInt();
+        int[] arr = new int[size];
+
+        // Initialize the array with user-provided values.
+        for (int i = 0; i < size; i++) {
+            System.out.print("Enter element " + (i + 1) + ": ");
+            arr[i] = scanner.nextInt();
+        }
+
+        boolean exit = false;
+
+        while (!exit) {
+            // Display the main menu.
+            System.out.println("\nMenu:");
+            System.out.println("1. Sort array elements");
+            System.out.println("2. Insert new element");
+            System.out.println("3. Delete an element");
+            System.out.println("4. Search for an element");
+            System.out.println("5. Print array elements,");
+            System.out.println("6. Exit");
+            System.out.print("Enter your choice: ");
+
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    // Sort the array and display it.
+                    Arrays.sort(arr);
+                    System.out.println("Array sorted successfully.");
+                    displayArray(arr, size);
+                    break;
+                case 2:
+                    // Insert a new element at a specified index.
+                    System.out.print("Enter the new element: ");
+                    int newElement = scanner.nextInt();
+                    System.out.print("Enter the index to replace at: ");
+                    int indexToReplace = scanner.nextInt();
+
+                    if (indexToReplace < 0 || indexToReplace >= size) {
+                        System.out.println("Invalid index. Index should be between 0 and " + (size - 1));
+                    } else {
+                        arr[indexToReplace] = newElement;
+                        System.out.println("Element replaced successfully.");
+                        displayArray(arr, size);
+                    }
+                    break;
+                case 3:
+                    // Delete an element at a specified index.
+                    System.out.print("Enter the index to delete: ");
+                    int indexToDelete = scanner.nextInt();
+
+                    if (indexToDelete < 0 || indexToDelete >= size) {
+                        System.out.println("Invalid index. Your index size is " + size);
+                    } else {
+                        // Shift elements to fill the gap.
+                        for (int i = indexToDelete; i < size - 1; i++) {
+                            arr[i] = arr[i + 1];
+                        }
+                        size--;
+                        System.out.println("Element deleted successfully.");
+                        displayArray(arr, size);
+                    }
+                    break;
+                case 4:
+                    // Search for an element and display its index.
+                    System.out.print("Enter the element to search: ");
+                    int elementToSearch = scanner.nextInt();
+                    boolean found = false;
+
+                    for (int i = 0; i < size; i++) {
+                        if (arr[i] == elementToSearch) {
+                            System.out.println("Element found at index " + i);
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    if (!found) {
+                        System.out.println("Element not found in the array.");
+                    }
+                    break;
+                case 5:
+                    // Display the current state of the array.
+                    displayArray(arr, size);
+                    break;
+                case 6:
+                    // Exit the program.
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
+
+        System.out.println("Program exited.");
+        scanner.close();
+    }
+}

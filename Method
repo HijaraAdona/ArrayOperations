@@ -1,0 +1,19 @@
+public class ArrayDisplay {
+    // A method to display the elements of an array up to a specified size.
+    public static void displayArray(int[] arr, int size) {
+        System.out.println("Array elements:");
+        for (int i = 0; i < size; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        // Create an array and call the displayArray method.
+        int[] arr = {1, 2, 3, 4, 5};
+        int size = arr.length;
+
+        // Call the displayArray method to print the array.
+        displayArray(arr, size);
+    }
+}

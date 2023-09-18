@@ -1,0 +1,147 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class ArrayListOperations {
+    public static void main(String[] args) {
+        ArrayList<String> stringList = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+
+        boolean exit = false;
+
+        while (!exit) {
+            displayMenu();
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline character
+
+            switch (choice) {
+                case 1:
+                    addElement(stringList, scanner);
+                    break;
+                case 2: 
+                    removeElement(stringList, scanner);
+                    break;
+                case 3:
+                    displayList(stringList);
+                    break;
+                case 4:
+                    searchElement(stringList, scanner);
+                    break;
+                case 5:
+                    updateElement(stringList, scanner);
+                    break;
+                case 6:
+                    clearList(stringList);
+                    break;
+                case 7:
+                    getSize(stringList);
+                    break;
+                case 8:
+                    checkEmpty(stringList);
+                    break;
+                case 9:
+                    insertElement(stringList, scanner);
+                    break;
+                case 10:
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
+
+        System.out.println("Program exited.");
+        scanner.close();
+    }
+
+    private static void displayMenu() {
+        System.out.println("\nMenu:");
+        System.out.println("1. Add element");
+        System.out.println("2. Remove element");
+        System.out.println("3. Display list");
+        System.out.println("4. Search for an element");
+        System.out.println("5. Update element");
+        System.out.println("6. Clear list");
+        System.out.println("7. Get size");
+        System.out.println("8. Check if list is empty");
+        System.out.println("9. Insert element at a specific index");
+        System.out.println("10. Exit");
+        System.out.print("Enter your choice: ");
+    }
+
+    private static void addElement(ArrayList<String> list, Scanner scanner) {
+        System.out.print("Enter a string to add: ");
+        String element = scanner.nextLine();
+        list.add(element);
+        System.out.println("Element added successfully.");
+    }
+
+    private static void removeElement(ArrayList<String> list, Scanner scanner) {
+        System.out.print("Enter the index to remove: ");
+        int index = scanner.nextInt();
+        if (index >= 0 && index < list.size()) {
+            list.remove(index);
+            System.out.println("Element removed successfully.");
+        } else {
+            System.out.println("Invalid index.");
+        }
+    }
+
+    private static void displayList(ArrayList<String> list) {
+        System.out.println("List elements:");
+        for (String element : list) {
+            System.out.println(element);
+        }
+    }
+
+    private static void searchElement(ArrayList<String> list, Scanner scanner) {
+        System.out.print("Enter the element to search: ");
+        String searchElement = scanner.nextLine();
+        int index = list.indexOf(searchElement);
+        if (index != -1) {
+            System.out.println("Element found at index " + index);
+        } else {
+            System.out.println("Element not found in the list.");
+        }
+    }
+
+    private static void updateElement(ArrayList<String> list, Scanner scanner) {
+        System.out.print("Enter the index to update: ");
+        int index = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline character
+        if (index >= 0 && index < list.size()) {
+            System.out.print("Enter the new string: ");
+            String newElement = scanner.nextLine();
+            list.set(index, newElement);
+            System.out.println("Element updated successfully.");
+        } else {
+            System.out.println("Invalid index.");
+        }
+    }
+
+    private static void clearList(ArrayList<String> list) {
+        list.clear();
+        System.out.println("List cleared.");
+    }
+
+    private static void getSize(ArrayList<String> list) {
+        System.out.println("List size: " + list.size());
+    }
+
+    private static void checkEmpty(ArrayList<String> list) {
+        System.out.println("Is the list empty? " + list.isEmpty());
+    }
+
+    private static void insertElement(ArrayList<String> list, Scanner scanner) {
+        System.out.print("Enter the index to insert at: ");
+        int index = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline character
+        if (index >= 0 && index <= list.size()) {
+            System.out.print("Enter the string to insert: ");
+            String element = scanner.nextLine();
+            list.add(index, element);
+            System.out.println("Element inserted successfully.");
+        } else {
+            System.out.println("Invalid index.");
+        }
+    }
+}
